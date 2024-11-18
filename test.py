@@ -15,6 +15,15 @@ if __name__ == '__main__':
         print(shell.run_command_blocking('pwd'))
         print(shell.run_command_blocking('ls'))
         print(shell.run_command_blocking('cat /root/test.py'))
+        print(shell.run_command_blocking('cat /root/test.py > /root/test-copy.py'))
+        
+        open('retrieved_file_cat.txt', 'w').write(
+            shell.run_command_blocking('cat /root/test.py')
+        )
+        open('retrieved_file_tmp.txt', 'wb').write(
+            container.read_binary_file_with_temp('/root/test-copy.py')
+        )
+        
         print(shell.run_command_blocking(['echo', '14@3214###\'$$$\n2r31eqwr99*@#$*@$*$\r\nAAAAAA\rBBB']))
         print(shell.run_command_blocking('echo $?'))
         print(shell.run_command_blocking('non-existent-1145141919810'))

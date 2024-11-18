@@ -337,8 +337,8 @@ class ShellInterface:
         if not isinstance(before_text, str):
             raise ShellFailure('Failed to run shell command, the returned result is not a string.')
         
-        if strip_final_newline and before_text[-2:] == '\r\n':
-            return before_text[:-2]
+        before_text = before_text.replace('\r\n', '\n')  # The tty seems to transform LF into CRLF. I don't know why.
+       
         if strip_final_newline and before_text[-1:] == '\n':
             return before_text[:-1]
         return before_text
@@ -350,7 +350,9 @@ class ShellInterface:
     This is NOT meant for transferring binary files or very large files.
     '''
     def echo_file_to_container(self, filename: str, content: str):
-        return self.run_command_blocking('echo ' + self.quote_string(content) + ' > ' + self.quote_string(filename))
+        # Cannot directly echo.
+        # Hint: Nothing is printed with echo -n '-n', but ` -n` can be printed with echo -n "" '-n'.
+        return self.run_command_blocking('echo -n "" ' + self.quote_string(content) + ' | tail -c +2 > ' + self.quote_string(filename))
     
     
     '''
