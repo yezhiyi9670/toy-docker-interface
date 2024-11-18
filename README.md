@@ -1,6 +1,6 @@
 # Simple Docker Interface
 
-This is a toy Python interface to a docker container.
+This is a toy Python interface to a docker container. Note that it only works with Linux hosts and specific container images.
 
 For usage, check `docker_interface.py` and `test.py`. Mandatory requirements is the `pexpect` package.
 
