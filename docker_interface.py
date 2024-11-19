@@ -361,7 +361,7 @@ class ShellInterface:
     This is NOT meant for transferring binary files or very large files.
     '''
     def cat_file_from_container(self, filename: str):
-        return self.run_command_blocking('cat ' + self.quote_string(filename), strip_final_newline=True)
+        return self.run_command_blocking('cat ' + self.quote_string(filename), strip_final_newline=False)
     
     
     # Close the shell
