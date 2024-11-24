@@ -18,3 +18,8 @@ apt install podman
 ```
 
 The `podman` command is nearly identical to `docker`. You may even `alias docker=podman`!
+
+Reminders:
+
+- You may also need to use `--cgroupns=host` on some outer containers.
+- If you make an existing container privileged by modifying configuration, you also need to remove `maskedPaths` and `readonlyPaths` from the configuration file.
